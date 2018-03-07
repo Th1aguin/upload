@@ -1,0 +1,76 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv='X-UA-Compatible'/>
+
+  	<link rel="stylesheet" href="js/jquery.plupload.queue/css/jquery.plupload.queue.css">
+	   <!-- JQUERY -->
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/plupload.full.min.js"></script>
+  	<script type="text/javascript" src="js/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+  	<script type="text/javascript" src="js/pt_BR.js"></script>
+</head>
+
+
+<body>
+
+	<h1>Upload</h1>
+    <div>
+    <h2>
+	    <a href="lista.xhtml" >Lista Arquivos</a>
+    </h2>
+  	</div>
+  	<div>
+	  	Digite o nome do usuario : <input id="usuario" type="text">
+  	</div>
+
+	<div id="uploader">
+	    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+	</div>
+ 
+<script type="text/javascript">
+// Initialize the widget when the DOM is ready
+$(function() {
+    // Setup html5 version
+    $("#uploader").pluploadQueue({
+        // General settings
+        runtimes : 'html5,flash,silverlight,html4',
+        url : "rest/arquivo/upload",
+         
+        chunk_size : '1mb',
+        rename : true,
+        dragdrop: true,
+
+        init: {
+        	 BeforeUpload: function(up,file){
+     	        up.settings.multipart_params = {
+     	            "usuario" : $("#usuario").val()
+     	        };
+             },
+             UploadComplete: function(){
+     			alert("Arquivo(s) adicionado(s) com sucesso");
+     			window.location = "lista.xhtml";
+             }
+        },
+        filters : {
+            // Maximum file size
+            max_file_size : '100mb'
+        },
+        multipart_params : {
+            "usuario" : $("#usuario").val()
+        },
+       
+ 
+        // Flash settings
+        flash_swf_url : '/plupload/js/Moxie.swf',
+     
+        // Silverlight settings
+        silverlight_xap_url : '/plupload/js/Moxie.xap'
+    });
+});
+</script>
+
+</body>
+</html>

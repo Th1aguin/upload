@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Lista de Arquivos</title>
+</h:head>
+<h:body>
+    <h1>Lista de Arquivos</h1>
+    <div>
+    <h2>
+	    <h:outputLink value="index.html" >Fazer Upload</h:outputLink>
+    </h2>
+    </div>
+    <h:outputText value=""/>
+    <h:dataTable value="#{arquivoMb.arquivos}" var="a" width="100%">
+      <h:column>
+        <f:facet style="text-align: left" name="header">
+          <h:outputText  value="Usuario"/>
+        </f:facet>
+        <h:outputText value="#{a.usuario}"/>
+      </h:column>
+      <h:column>
+         <f:facet style="text-align: left" name="header">
+          <h:outputText  value="Nome Arquivo"/>
+        </f:facet>
+        <h:outputText value="#{a.nome}"/>
+      </h:column>
+      <h:column>
+         <f:facet style="text-align: left" name="header">
+          <h:outputText   value="Tempo Upload"/>
+        </f:facet>
+        <h:outputText value="#{a.miliSegundos} Mili seg"/>
+      </h:column>
+      <h:column>
+         <f:facet style="text-align: left" name="header">
+          <h:outputText  value="Chunks"/>
+        </f:facet>
+        <h:outputText value="#{a.blocos}"/>
+      </h:column>
+      <h:column>
+        <f:facet style="text-align: left" name="header">
+          <h:outputText  value="Status"/>
+        </f:facet>
+        <h:outputText value="#{a.status}"/>
+      </h:column>
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value=""/>
+        </f:facet>
+        <h:outputLink value="#{a.link}" target="_blank">Download</h:outputLink>
+      </h:column>
+    </h:dataTable>
+  </h:body>
+</html>
